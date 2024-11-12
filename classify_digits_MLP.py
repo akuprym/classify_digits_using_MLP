@@ -24,3 +24,14 @@ random.seed(SEED_VALUE)
 np.random.seed(SEED_VALUE)
 tf.random.set_seed(SEED_VALUE)
 
+(X_train_all, y_train_all), (X_test, y_test) = mnist.load_data()
+
+X_valid = X_train_all[:10000]
+X_train = X_train_all[10000:]
+
+y_train = y_train_all[10000:]
+y_valid = y_train_all[:10000]
+
+print(X_train.shape)
+print(X_valid.shape)
+print(X_test.shape)
