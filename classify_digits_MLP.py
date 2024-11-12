@@ -35,3 +35,38 @@ y_valid = y_train_all[:10000]
 print(X_train.shape)
 print(X_valid.shape)
 print(X_test.shape)
+
+plt.figure(figsize=(18, 5))
+for i in range(3):
+    plt.subplot(1, 3, i + 1)
+    plt.axis(True)
+    plt.imshow(X_train[i], cmap="gray")
+    plt.subplots_adjust(wspace=0.2, hspace=0.2)
+
+X_train = X_train.reshape((X_train.shape[0], 28 * 28))
+X_train = X_train.astype("float32") / 255
+
+X_test = X_test.reshape((X_test.shape[0], 28 * 28))
+X_test = X_test.astype("float32") / 255
+
+X_valid = X_valid.reshape((X_valid.shape[0], 28 * 28))
+X_valid = X_valid.astype("float32") / 255
+
+# One-Hot Label Encoding
+y_train = to_categorical(y_train)
+y_valid = to_categorical(y_valid)
+y_test  = to_categorical(y_test)
+
+model = tf.keras.Sequential()
+model.add(Dense(128, activation='relu', input_shape=(X_train.shape[1],)))
+model.add(Dense(128, activation='relu'))
+model.add(Dense(10, activation='softmax'))
+model.summary()
+
+model.compile(
+    optimizer="rmsprop",
+    loss="categorical_crossentropy",
+    metrics=["accuracy"],
+)
+
+
