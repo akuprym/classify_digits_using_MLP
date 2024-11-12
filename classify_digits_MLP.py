@@ -69,4 +69,8 @@ model.compile(
     metrics=["accuracy"],
 )
 
-
+training_results = model.fit(X_train,
+                    y_train,
+                    epochs=21,
+                    batch_size=64,
+                    validation_data=(X_valid, y_valid))
